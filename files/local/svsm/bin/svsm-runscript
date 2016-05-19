@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+
+depends_on() {
+  list=$*
+  for s in $list; do
+    svinfo -s $s > /dev/null
+    [ $? = 3 ] || exit 1
+  done
+}
+
+if [[ $# -ne 1 || $(basename "$1") != "run" ]]; then
+  echo 'Must run svsm-runscript as a shebang script' >&2
+  exit 2
+fi
+
+SVSM_HOME=${SVSM_HOME:-$HOME/.config/svsm}
+script=$(readlink -f $1)
+service="$(basename $(dirname "$script"))"
+logdir="$SVSM_HOME/log/sv/$service"
+mkdir -p $logdir
+
+# cd to home
+cd
+
+exec 1>>"$logdir/$service.log" 2>>"$logdir/errors.log"
+
+source $script

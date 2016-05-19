@@ -1,0 +1,69 @@
+#!/bin/bash
+
+set -e
+
+repo_dir="$(dirname "$(dirname "$(readlink -f "$0")")")"
+
+dry_run=false
+if [[ "$1" == "-n" ]]; then
+  dry_run=true
+  shift
+fi
+
+map_file="$1"
+
+function run() {
+  if [[ "$dry_run" == "false" ]]; then
+    "$@"
+  else
+    echo "$@"
+  fi
+}
+
+function abort() {
+  echo 'Error:' "$@" >&2
+  exit 1
+}
+
+if [[ -z "$map_file" || ! -e "$map_file" ]]; then
+  abort 'map file not found: ' "$map_file"
+fi
+
+while read -r line; do
+  if [[ -z "$line" || ${line:0:1} == '#' ]]; then
+    continue
+  fi
+  params=($line)
+  target="$HOME/${params[0]}"
+  src="${params[1]:-${params[0]}}"
+
+  if [[ "${src:0:6}" == 'git://' ]]; then
+    if [[ -d "$target" ]]; then
+      (
+        run cd "$target"
+        run git pull
+      )
+    else
+      parent=$(dirname "$target")
+      if [[ ! -d "$parent" ]]; then
+        run mkdir -pv "$parent"
+      fi
+      run git clone "$src" "$target"
+    fi
+  else
+    src_path="$repo_dir/files/$src"
+    if [[ ! -e "$src_path" && "${src:0:1}" == '.' ]]; then
+      src_path="$repo_dir/files/${src:1}"
+    fi
+    if [[ ! -e "$src_path" ]]; then
+      abort 'source not found:' "$src_path"
+    fi
+    parent=$(dirname "$target")
+    if [[ ! -d "$parent" ]]; then
+      run mkdir -pv "$parent"
+    fi
+    if [[ ! -L "$target" || "$(readlink "$target")" != "$src_path" ]]; then
+      run ln -svnf "$src_path" "$target"
+    fi
+  fi
+done < "$map_file"

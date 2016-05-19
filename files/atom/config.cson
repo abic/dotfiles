@@ -1,0 +1,19 @@
+"*":
+  autosave:
+    enabled: true
+  core:
+    themes: [
+      "atom-dark-ui"
+      "atom-dark-syntax"
+    ]
+  editor:
+    fontFamily: "Envy Code R"
+    fontSize: 10
+    invisibles: {}
+    showIndentGuide: true
+  "go-plus":
+    showPanelWhenNoIssuesExist: true
+  linter: {}
+  metrics: false
+  welcome:
+    showOnStartup: false

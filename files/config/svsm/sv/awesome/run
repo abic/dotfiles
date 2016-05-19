@@ -1,0 +1,4 @@
+#!/usr/bin/env svsm-runscript
+
+export wpsetters=feh
+exec awesome

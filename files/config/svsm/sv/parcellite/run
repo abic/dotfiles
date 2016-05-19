@@ -1,0 +1,3 @@
+#!/usr/bin/env svsm-runscript
+
+exec /usr/bin/parcellite

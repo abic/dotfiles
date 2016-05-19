@@ -1,0 +1,83 @@
+#!/bin/bash
+
+set -e
+
+export SVSM_HOME=${SVSM_HOME:-$HOME/.config/svsm}
+logdir="$SVSM_HOME/log"
+rundir="$SVSM_HOME/run"
+
+function abort() {
+  echo 'Error:' "$@" >&2
+  exit 1
+}
+
+function start() {
+  mkdir -p "$logdir" "$rundir"
+
+  exec 1>>"$logdir/svscan.log" 2>>"$logdir/errors.log"
+  echo $$ > "$rundir/svscan.pid"
+
+  for script in "$SVSM_HOME/init.d/"*; do
+    if [[ -x "$script" ]]; then
+      script_name="$(basename "$script" .sh)"
+      script_logdir="$logdir/init/$script_name"
+      mkdir -p "$script_logdir"
+      "$script" 1>> "$script_logdir/$script_name.log" 2>> "$script_logdir/err.log"
+    fi
+  done
+
+  exec svscan "$SVSM_HOME/sv"
+}
+
+function quit() {
+  pidfile="$rundir/svscan.pid"
+  if [[ ! -f "$pidfile" ]]; then
+    abort 'pidfile not found:' "$pidfile"
+  fi
+
+  pid=$(cat "$pidfile")
+  if [[ -z "$pid" ]]; then
+    abort 'pidfile is empty:' "$pidfile"
+  fi
+  for service in "$SVSM_HOME/sv/"*/run; do
+    service=$(basename "$(dirname "$service")")
+    svc -x -d "$service"
+  done
+  kill "$pid"
+  rm "$pidfile"
+}
+
+function check_cmd() {
+  if ! which $1 1>> /dev/null 2>> /dev/null; then
+    abort "missing '"$1"' command"
+  fi
+}
+
+function check() {
+  check_cmd which
+  check_cmd svscan
+  check_cmd svinfo
+  check_cmd svc
+  check_cmd readlink
+  check_cmd svsm-runscript
+}
+
+cmd=${1:-start}
+case $cmd in
+start)
+  check
+  start
+  ;;
+quit)
+  check
+  quit
+  ;;
+check)
+  check
+  echo Ok
+  ;;
+help)
+  ;;
+*)
+  ;;
+esac

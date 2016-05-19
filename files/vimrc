@@ -1,0 +1,28 @@
+set sw=2 sts=2 et ai
+colorscheme desert
+set nocompatible
+"set guioptions-=m
+"set guioptions-=T
+"set guioptions-=r
+if has("gui_gtk2")
+  set guifont=Envy\ Code\ R:h8
+endif
+
+set spelllang=en_us
+
+autocmd FileType vala setlocal sw=4
+autocmd FileType vala setlocal efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
+autocmd FileType make setlocal noexpandtab sw=4
+autocmd FileType gtkaml setlocal sw=4
+autocmd FileType gtkon setlocal sw=4
+autocmd FileType xml setlocal sw=4
+autocmd FileType python setlocal sw=4
+autocmd FileType xml setlocal foldmethod=syntax
+autocmd FileType go setlocal sw=8 sts=8 noet
+autocmd BufNewFile *.hs r ~/.vim/skeleton.hs
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+autocmd BufRead,BufNewFile *.vapi noremap <F8> "gyiwO[CCode (cname = "<ESC>"gpa")]<ESC>
+

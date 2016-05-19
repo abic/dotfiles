@@ -1,0 +1,16 @@
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 947x877+0+19
+	show-graph = true
+	file-view-vpane-position = 475
+	main-window-view = FileView
+	history-view-vpane-position = 505
+[user]
+	name = Jeffrey T. Peckham
+	email = abic@ophymx.com
+[alias]
+	unstage = rm -r --cached --
+[color]
+	ui = true
+[push]
+	default = simple

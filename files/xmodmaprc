@@ -1,0 +1,14 @@
+! ??
+keycode 248 = XF86AudioRecord
+
+! Control_L -> Super_L (Needed for Model M)
+remove Control = Control_L
+clear mod4
+keycode 37 = Super_L
+add mod4 = Super_L
+
+! CapsLock -> Control_l
+keycode 66 = Control_L
+clear Lock
+add Control = Control_L
+

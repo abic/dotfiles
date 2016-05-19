@@ -1,0 +1,23 @@
+.local/share/awesome/themes git://github.com/mikar/awesome-themes.git
+
+.atom/config.cson
+.bash.d/android.sh
+.bash.d/golang.sh
+.bash.d/local.sh
+.bash.d/maven.sh
+.bash.d/nodejs.sh
+.bash.d/rc.sh
+.config/awesome/rc.lua
+.config/gtk-3.0/settings.ini
+.config/svsm
+.config/terminator/config
+.vim
+.bashrc
+.gitconfig
+.gitignore_global
+.local/svsm
+.synclientrc
+.vimrc
+.xinitrc
+.xmodmaprc
+.xscreensaver-resources
