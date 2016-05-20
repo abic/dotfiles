@@ -1,0 +1,34 @@
+#!/bin/bash
+
+function yN() {
+  local msg="$*"
+  local response
+  echo -n "$msg [yN] "
+  read response
+  response=${response:-N}
+  response=${response[0]}
+  response=${response,,}
+  if [ "$response" = "y" ]; then
+    return 0
+  fi
+  return 1
+
+}
+
+function Yn() {
+  local msg="$*"
+  local response
+  echo -n "$msg [yN] "
+  read response
+  response=${response:-N}
+  response=${response[0]}
+  response=${response,,}
+  if [ "$response" = "y" ]; then
+    return 0
+  fi
+  return 1
+}
+
+if [[ ${BASH_SOURCE[0]} == $0 ]]; then
+  $(basename $0) "$@"
+fi

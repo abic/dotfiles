@@ -1,5 +1,4 @@
-.config/awesome/themes git://github.com/mikar/awesome-themes.git
-
+bin
 .atom/config.cson
 .bash.d/android.sh
 .bash.d/golang.sh
@@ -7,16 +6,18 @@
 .bash.d/maven.sh
 .bash.d/nodejs.sh
 .bash.d/rc.sh
+.bashrc
 .config/awesome/rc.lua
+.config/awesome/themes git://github.com/mikar/awesome-themes.git
 .config/gtk-3.0/settings.ini
 .config/svsm
 .config/terminator/config
-.vim
-.bashrc
 .gitconfig
 .gitignore_global
+.local/scripts
 .local/svsm
 .synclientrc
+.vim
 .vimrc
 .xinitrc
 .xsession xinitrc

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+ISO="$1"
+shift
+
+cdemu load 0 "$ISO" && (
+  mount /mnt/cdrom && (
+    "$@" || true
+  ) && umount /mnt/cdrom || true
+) && cdemu unload 0
