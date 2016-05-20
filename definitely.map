@@ -19,5 +19,6 @@
 .synclientrc
 .vimrc
 .xinitrc
+.xsession xinitrc
 .xmodmaprc
 .xscreensaver-resources
