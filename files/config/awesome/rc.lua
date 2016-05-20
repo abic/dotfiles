@@ -41,7 +41,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 theme = "dust"
-beautiful.init(os.getenv("HOME") .. "/.local/share/awesome/themes/" .. theme .. "/theme.lua")
+beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/" .. theme .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 

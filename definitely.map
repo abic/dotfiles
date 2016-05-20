@@ -1,4 +1,4 @@
-.local/share/awesome/themes git://github.com/mikar/awesome-themes.git
+.config/awesome/themes git://github.com/mikar/awesome-themes.git
 
 .atom/config.cson
 .bash.d/android.sh
