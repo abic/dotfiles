@@ -1,4 +1,3 @@
-bin
 .atom/config.cson
 .bash.d/android.sh
 .bash.d/golang.sh
