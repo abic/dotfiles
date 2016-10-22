@@ -1,0 +1,14 @@
+.bash.d.sh
+.bash.d/golang.sh
+.bash.d/local.sh
+.bash.d/maven.sh
+.bash.d/nodejs.sh
+.bash.d/python.sh
+.bash.d/rc.sh
+.bash.d/ruby.sh
+.bashrc
+.gitconfig
+.gitignore_global
+.local/scripts
+.vim
+.vimrc

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ -z "$MANPATH" ]]; then
+  export MANPATH="/usr/local/share/man:/usr/share/man"
+fi
+
 for prefix in .local .local/svsm .local/scripts; do
   if [[ -d "$HOME/${prefix}/bin" && $PATH != *"$HOME/${prefix}/bin"* ]]; then
     export PATH="$HOME/${prefix}/bin${PATH:+:$PATH}"

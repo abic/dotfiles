@@ -9,7 +9,5 @@ export MAIL=~/Mail/inbox
 export NO_AT_BRIDGE=1
 set -o vi
 
-export VIRTUALENV_DISTRIBUTE=true
-
 export PKG_CONFIG_PATH="$HOME/.pkgconfig:$PKG_CONFIG_PATH"
 export PATH="$HOME/bin:$HOME/Games/bin:$PATH"

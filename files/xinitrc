@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/bin/bash
 
-export PATH="$HOME/.local/svsm/bin:$PATH"
+. "$HOME/.bash.d.sh"
 
 exec svsm start

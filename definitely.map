@@ -1,10 +1,13 @@
 .atom/config.cson
+.bash.d.sh
 .bash.d/android.sh
 .bash.d/golang.sh
 .bash.d/local.sh
 .bash.d/maven.sh
 .bash.d/nodejs.sh
+.bash.d/python.sh
 .bash.d/rc.sh
+.bash.d/ruby.sh
 .bashrc
 .config/awesome/rc.lua
 .config/awesome/themes git://github.com/mikar/awesome-themes.git

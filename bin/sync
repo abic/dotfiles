@@ -25,6 +25,31 @@ function abort() {
   exit 1
 }
 
+relpath () {
+    [ $# -ge 1 ] && [ $# -le 2 ] || return 1
+    current="${2:+"$1"}"
+    target="${2:-"$1"}"
+    [ "$target" != . ] || target=/
+    target="/${target##/}"
+    [ "$current" != . ] || current=/
+    current="${current:="/"}"
+    current="/${current##/}"
+    appendix="${target##/}"
+    relative=''
+    while appendix="${target#"$current"/}"
+        [ "$current" != '/' ] && [ "$appendix" = "$target" ]; do
+        if [ "$current" = "$appendix" ]; then
+            relative="${relative:-.}"
+            echo "${relative#/}"
+            return 0
+        fi
+        current="${current%/*}"
+        relative="$relative${relative:+/}.."
+    done
+    relative="$relative${relative:+${appendix:+/}}${appendix#/}"
+    echo "$relative"
+}
+
 if [[ -z "$map_file" || ! -e "$map_file" ]]; then
   abort 'map file not found: ' "$map_file"
 fi
@@ -62,6 +87,8 @@ while read -r line; do
     if [[ ! -d "$parent" ]]; then
       run mkdir -pv "$parent"
     fi
+    src_path=$(relpath "$parent" "$src_path")
+
     if [[ ! -L "$target" || "$(readlink "$target")" != "$src_path" ]]; then
       run ln -svnf "$src_path" "$target"
     fi

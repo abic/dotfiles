@@ -18,7 +18,8 @@ get_volume(){
 
   # index down a bit for volume line
   line=$(($line + 6))
-  pacmd list-${dev_type}s|awk 'NR=="'"$line"'"{print $3}'|sed '{s/%//}'
+  vol=$(pacmd list-${dev_type}s|awk 'NR=="'"$line"'"{print $3}'|sed '{s/%//}')
+  expr $vol \* 100 / 65536
 }
 
 convert_volume(){
@@ -109,6 +110,7 @@ mute_mic_toggle(){
 }
 cmd="$1"
 
+pkill notify-osd
 case "$cmd" in
   d|down)
     vol_down

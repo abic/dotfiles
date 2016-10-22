@@ -2,6 +2,13 @@
   autosave:
     enabled: true
   core:
+    customFileTypes:
+      "source.desktop": [
+        "config"
+      ]
+      "source.vala": [
+        "vapi"
+      ]
     themes: [
       "atom-dark-ui"
       "atom-dark-syntax"
@@ -15,5 +22,10 @@
     showPanelWhenNoIssuesExist: true
   linter: {}
   metrics: false
+  "tree-view":
+    hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
+".source.vala":
+  editor:
+    tabLength: 4
